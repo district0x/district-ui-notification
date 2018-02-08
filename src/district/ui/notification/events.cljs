@@ -1,15 +1,15 @@
-(ns district.ui.district-ui-notification.events
-  (:require [day8.re-frame.async-flow-fx]
+(ns district.ui.notification.events
+  (:require ;;[day8.re-frame.async-flow-fx]
             [day8.re-frame.forward-events-fx]
             [district0x.re-frame.spec-interceptors :as d0x-spec-interceptors]
-            [district.ui.district-ui-notification.queries :as queries]
+            [district.ui.notification.queries :as queries]
             [re-frame.core :as re-frame]
             ;;[vimsical.re-frame.cofx.inject :as inject]
             ))
 
 (def interceptors [re-frame/trim-v])
 
-;; TODO : intercept and spec
+;; TODO : spec-interceptors
 
 (re-frame/reg-event-fx
   ::start
@@ -36,7 +36,7 @@
   ::pop-notification
   [interceptors]
   (fn [{:keys [db]} _]
-    {:db (queries/remove-first-notification db)
+    {:db (queries/drop-first-notification db)
      :dispatch [::show-notification (queries/pop-notification db)]}))
 
 (re-frame/reg-event-fx

@@ -1,6 +1,6 @@
-(ns district.ui.district-ui-notification
+(ns district.ui.notification
   (:require [cljs.spec.alpha :as s]
-            [district.ui.district-ui-notification.events :as events]
+            [district.ui.notification.events :as events]
             [mount.core :refer [defstate]]
             [re-frame.core :as re-frame]))
 

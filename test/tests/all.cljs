@@ -2,21 +2,21 @@
   (:require
     [cljs.test :refer [deftest is testing run-tests async use-fixtures]]
     [day8.re-frame.test :refer [run-test-async run-test-sync wait-for]]
-    [district.ui.district-ui-notification.events :as events]
-    [district.ui.district-ui-notification.subs :as subs]
-    [district.ui.district-ui-notification]
+    [district.ui.notification.events :as events]
+    [district.ui.notification.subs :as subs]
+    [district.ui.notification]
     [mount.core :as mount]
     [re-frame.core :as re-frame :refer [dispatch subscribe]]))
 
-(use-fixtures :each
+#_(use-fixtures :each
   {:before (fn []
              (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
                  (mount/start)))
    :after (fn [] (mount/stop))})
 
-(deftest tests
+#_(deftest tests
   (run-test-async
-    (let [notification @(subscribe [::subs/district-ui-notification])]
+    (let [notification @(subscribe [::subs/notification])]
 
       ;; event accepts arbitrary props
       (dispatch [::events/show {:message "foo"
