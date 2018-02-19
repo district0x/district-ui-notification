@@ -1,12 +1,11 @@
-(defproject district0x/district-ui-notification "1.0.0"
+(defproject district0x/district-ui-notification "1.0.0-SNAPSHOT"
   :description "district UI module providing logic for notifications"
   :url "https://github.com/district0x/district-ui-notification"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[district0x/re-frame-spec-interceptors "1.0.1"]
-                 [day8.re-frame/async-flow-fx "0.0.8"]
-                 [day8.re-frame/forward-events-fx "0.0.5"]
+  :dependencies [[day8.re-frame/forward-events-fx "0.0.5"]
+                 [district0x/re-frame-spec-interceptors "1.0.1"]
                  [mount "0.1.11"]
                  [org.clojure/clojurescript "1.9.946"]
                  [re-frame "0.10.2"]]

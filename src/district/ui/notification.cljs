@@ -1,21 +1,16 @@
 (ns district.ui.notification
-  (:require [cljs.spec.alpha :as s]
+  (:require [cljs.pprint :as pprint]
+            [cljs.spec.alpha :as s]
             [district.ui.notification.events :as events]
-            [mount.core :refer [defstate]]
+            [district.ui.notification.spec :as spec]
+            [mount.core :as mount :refer [defstate]]
             [re-frame.core :as re-frame]))
 
-(s/def ::default-show-duration integer?)
-(s/def ::show-duration integer?)
-(s/def ::message string?)
-(s/def ::open? boolean?)
-(s/def ::notification (s/keys :req-un [::message]
-                              :opt-un [::open? ::show-duration]))
-(s/def ::queue (s/+ ::notification))
-(s/def ::opts (s/nilable (s/keys :req-un [::default-show-duration]
-                                 :opt-un [::notification ::queue])))
-
+;; TODO: spec-try ::type value macro
 (defn start [opts]
-  {:pre [(s/assert ::opts opts)]}
+  {:pre [(do (when-not (s/valid? ::spec/opts opts)
+               (throw (js/Error (str "Invalid options passed to the component: \n" (s/explain-str ::spec/opts opts)))))
+             (s/assert ::spec/opts opts))]}
   (re-frame/dispatch-sync [::events/start opts]))
 
 (defn stop []
