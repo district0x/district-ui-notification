@@ -12,5 +12,3 @@ pom.xml.asc
 /.idea/
 /node_modules/
 /figwheel_server.log
-/tests-output/
-/district-ui-web3-tx-log-core.iml
