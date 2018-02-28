@@ -68,13 +68,13 @@
                                                        show-duration
                                                        (queries/default-show-duration db)))
                                            :notification next})))))]
-     {:dispatch-n (mapv #(vec [::show-next-notification %])
+     {:dispatch-n (mapv #(vec [::schedule-next-notification %])
                         events)
       :dispatch-later [{:ms (-> events last :delay)
                         :dispatch [::clear-queue]}]})))
 
 (re-frame/reg-event-fx
- ::show-next-notification
+ ::schedule-next-notification
  [interceptors]
  (fn [{:keys [:db]} [{:keys [delay notification]}]]
    {:dispatch-later [{:ms delay

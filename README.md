@@ -16,6 +16,8 @@ Include `[district.ui.notification]` in your CLJS file, where you use `mount/sta
 - [district.ui.notification](#districtuinotification)
 - [district.ui.notification.events](#districtuinotificationevents)
   - [::show](#show)
+  - [::show-notification](#shownotification)
+  - [::hide-notification](#hidenotification)
 - [district.ui.notification.subs](#districtuinotificationsubs)
   - [::notification](#notification)
 - [district.ui.notification.queries](#districtuinotificationqueries)
