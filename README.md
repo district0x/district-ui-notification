@@ -129,19 +129,19 @@ Removes the first notification in queue.
 
 #### <a name="peeknotificationquery"> `peek-notification`
 
-Return the first notifictaion in queue, does not alter the queue.
+Return the first notification in queue, does not alter the queue.
 
 #### <a name="shownotificationquery"> `show-notification`
 
-Sets the current notification to be displayed.
+Sets the current notification to be displayed. Used by the [`::show-notification`](#shownotification) event.
 
 #### <a name="hidenotificationquery"> `hide-notification`
 
-Sets `:open?` key of the current notification to false.
+Sets `:open?` key of the current notification to `false`. Used by the [`::hide-notification`](#hidenotification) event.
 
 #### <a name="notificationquery"> `notification`
 
-Returns the current notification.
+Returns the current notification. Used by the [`::notification`](#notification) sub.
 
 ## <a name="districtuinotificationspec"> district.ui.notification.spec
 
