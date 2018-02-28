@@ -1,4 +1,4 @@
-(defproject district0x/district-ui-notification "1.0.0-SNAPSHOT"
+(defproject district0x/district-ui-notification "1.0.0"
   :description "district UI module providing logic for notifications"
   :url "https://github.com/district0x/district-ui-notification"
   :license {:name "Eclipse Public License"

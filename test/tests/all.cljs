@@ -13,35 +13,21 @@
                       (mount/start)))
    :after (fn [] (mount/stop))})
 
-(deftest tests
+(deftest arbitrary-props
   (run-test-async
    (let [notification (re-frame/subscribe [::subs/notification])]
+     (re-frame/dispatch [::events/show {:message "foo"
+                                        :action-href "bar"}])
+     (wait-for [::events/show-notification]
+               (is (= "foo" (:message @notification)))
+               (is (= "bar" (:action-href @notification)))
+               (wait-for [::events/clear-queue])))))
 
-     ;; (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
-     ;;     (mount/start))
-
-     ;; ;; TEST: event accepts arbitrary props
-     ;; (re-frame/dispatch [::events/show {:message "foo"
-     ;;                                    :action-href "bar"}])
-
-     ;; (wait-for [::events/show-notification]
-     ;;           (is (= "foo" (:message @notification)))
-     ;;           (is (= "bar" (:action-href @notification)))
-     ;;           (wait-for [::events/clear-queue]))
-
-     ;; ;; TEST: sync sugar
-
-     ;; (re-frame/dispatch [::events/show "abc"])
-
-     ;; (wait-for [::events/show-notification]
-     ;;           (is (= "abc" (:message @notification)))
-     ;;           (wait-for [::events/clear-queue]))
-
-     ;; TEST: override default-show-duration
-
+(deftest override-default-show-duration
+  (run-test-async
+   (let [notification (re-frame/subscribe [::subs/notification])]
      (re-frame/dispatch [::events/show {:message "foo"
                                         :show-duration 2000}])
-
      (wait-for [::events/show-notification]
                (let [tick (.getTime (js/Date.))]
                  (wait-for [::events/clear-queue]
