@@ -7,3 +7,9 @@ addons:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+notifications:
+  email:
+    recipients:
+      - filip@district0x.io
+    on_success: never # default: change
+    on_failure: always # default: always
