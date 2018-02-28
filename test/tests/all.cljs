@@ -11,37 +11,38 @@
 (use-fixtures :each
   {:before (fn [] (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
                       (mount/start)))
-   :after (fn [] (do (mount/stop)
-                     #_(re-frame/purge-event-queue)))})
+   :after (fn [] (do (mount/stop)))})
 
-(deftest accepts-arbitrary-props
-  (run-test-async
-   (re-frame/dispatch [::events/show {:message "foo"
-                                      :action-href "bar"}])
-   (wait-for [::events/show-notification]
-             (let [notification @(re-frame/subscribe [::subs/notification])]
-               (is (= "foo" (:message notification)))
-               (is (= "bar" (:action-href notification))))
-             (wait-for [::events/clear-queue]))))
-
-(deftest sync-sugar
+(deftest tests
   (run-test-async
    (let [notification (re-frame/subscribe [::subs/notification])]
+
+     ;; TEST: event accepts arbitrary props
+     (re-frame/dispatch [::events/show {:message "foo"
+                                        :action-href "bar"}])
+
+     (wait-for [::events/show-notification]
+               (is (= "foo" (:message @notification)))
+               (is (= "bar" (:action-href @notification)))
+               (wait-for [::events/clear-queue]))
+
+     ;; TEST: sync sugar
+
      (re-frame/dispatch [::events/show "abc"])
+
      (wait-for [::events/show-notification]
                (is (= "abc" (:message @notification)))
-               (wait-for [::events/clear-queue])))))
+               (wait-for [::events/clear-queue]))
 
-(deftest default-duration-override
-  (run-test-async
-   (re-frame/dispatch [::events/show {:message "foo"
-                                      :show-duration 2000}])
-   (wait-for [::events/show-notification]
-             (let [tick (.getTime (js/Date.))]
-               (wait-for [::events/clear-queue]
-                         (let [duration (- (.getTime (js/Date.)) tick)]
-                           ;; notification should be displayed for 2 seconds (+/- 10 percent)
+     ;; TEST: override default-show-duration
 
-                           (prn duration)
+     (re-frame/dispatch [::events/show {:message "foo"
+                                        :show-duration 2000}])
 
-                           (is (and (>= duration 1800) (<= duration 2200)))))))))
+     (wait-for [::events/show-notification]
+               (let [tick (.getTime (js/Date.))]
+                 (wait-for [::events/clear-queue]
+                           (let [duration (- (.getTime (js/Date.)) tick)]
+                             (is (= "foo" (:message @notification)))
+                             ;; notification should be displayed for 2 seconds (+/- 10 percent)
+                             (is (and (>= duration 1800) (<= duration 2200))))))))))

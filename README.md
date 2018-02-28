@@ -1,6 +1,6 @@
 # district-ui-notification
 
-TODO: CI badge
+[![Build Status](https://travis-ci.org/district0x/district-ui-notification.svg?branch=master)](https://travis-ci.org/district0x/district-ui-notification)
 
 Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://github.com/Day8/re-frame) module for a district UI, that provides core logic for transaction notofications. This module does not provide [reagent](https://github.com/reagent-project/reagent) UI component for notifications, only
 logic to build the component upon. This way many different reagent components can be build on top of this module.
@@ -86,11 +86,11 @@ which is just a synctatic sugar for the former.
 
 #### <a name="shownotification"> `::show-notification`
 
-Sets current notification to be displayed, bypassing the queue.
+Sets active (current) notification to be displayed, bypassing the queue.
 
 #### <a name="hidenotification"> `::hide-notification`
 
-Sets `:open` of the current notification to `false`.
+Sets `:open` of the active notification to `false`.
 
 ## <a name="districtuinotificationsubs"> district.ui.notification.subs
 
@@ -98,7 +98,7 @@ re-frame subscriptions provided by this module:
 
 #### <a name="notification"> `::notification`
 
-This is typically the only subscription you will need. Returns current notification that is first in queue.
+This is typically the only subscription you will need. Returns active notification.
 Subscription returns a map with key-value pairs:
 
 * `:open?` false if notification has already been displayed for `:show-duration` (or `:default-show-duration`) amount of time.
