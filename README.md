@@ -29,6 +29,7 @@ Include `[district.ui.notification]` in your CLJS file, where you use `mount/sta
   - [notification](#notificationquery)
 - [district.ui.notification.spec](#districtuinotificationspec)
   - [::notification](#notification-spec)
+  - [::opts](#opts-spec)
 
 ## <a name="districtuinotification"> district.ui.notification
 
@@ -45,6 +46,16 @@ You can pass following args to initiate this module:
 (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
       (mount/start))
 ```
+
+The validity of the args passed to the module will be checked at runtime if you have set the `clojure.spec.check-asserts` system property to `true`:
+
+```clojure
+(ns district.ui.core
+  (:require [cljs.spec.alpha :as s]))
+
+    (s/check-asserts true)
+```
+If the do not conform to the  [`::opts`](#opts)  spec, an exception is thrown.
 
 ## <a name="districtuinotificationevents"> district.ui.notification.events
 
@@ -160,6 +171,10 @@ This is typically the only spec you will need. Defines the valid argument for th
                                :message "FOO"
                                :foo "bar"})
 ```
+
+#### <a name="opts-spec">`::opts`
+
+Spec for the options passed to the module. You can toggle whether this spec is checked, see [district.ui.notification](#districtuinotification).
 
 ## Development
 

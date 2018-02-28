@@ -6,11 +6,8 @@
             [mount.core :as mount :refer [defstate]]
             [re-frame.core :as re-frame]))
 
-;; TODO: spec-try ::type value macro
 (defn start [opts]
-  {:pre [(do (when-not (s/valid? ::spec/opts opts)
-               (throw (js/Error (str "Invalid options passed to the component: \n" (s/explain-str ::spec/opts opts)))))
-             (s/assert ::spec/opts opts))]}
+  {:pre [(s/assert ::spec/opts opts)]}
   (re-frame/dispatch-sync [::events/start opts]))
 
 (defn stop []
