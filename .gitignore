@@ -12,3 +12,6 @@ pom.xml.asc
 /.idea/
 /node_modules/
 /figwheel_server.log
+package-lock.json
+tests-output/
+

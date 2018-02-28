@@ -5,14 +5,17 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[day8.re-frame/forward-events-fx "0.0.5"]
+                 [district0x/re-frame-interval-fx "1.0.2"]
                  [district0x/re-frame-spec-interceptors "1.0.1"]
                  [mount "0.1.11"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [re-frame "0.10.2"]]
+                 [re-frame "0.10.5"]]
+
+  :clean-targets ^{:protect false} ["test-output"]
 
   :doo {:paths {:karma "./node_modules/karma/bin/karma"}}
 
-  :npm {:devDependencies [[karma "1.7.1"]
+  :npm {:devDependencies [[karma "2.0.0"]
                           [karma-chrome-launcher "2.2.0"]
                           [karma-cli "1.0.1"]
                           [karma-cljs-test "0.1.0"]]}

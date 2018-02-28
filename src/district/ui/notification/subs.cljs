@@ -5,4 +5,11 @@
 (re-frame/reg-sub
  ::notification
  (fn [db]
+   ;; TODO
+   (prn "@DB"  db)
    (queries/notification db)))
+
+(re-frame/reg-sub
+ ::peek-notification
+ (fn [db]
+   (queries/peek-notification db)))

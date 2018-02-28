@@ -1,6 +1,5 @@
 (ns district.ui.notification.events
-  (:require [day8.re-frame.async-flow-fx]
-            [day8.re-frame.forward-events-fx]
+  (:require [day8.re-frame.forward-events-fx]
             [district0x.re-frame.interval-fx]
             [district0x.re-frame.spec-interceptors :as d0x-spec-interceptors]
             [district.ui.notification.spec :as spec]
@@ -81,15 +80,15 @@
    {:dispatch-later [{:ms delay
                       :dispatch [::show-notification notification]}]}))
 
+(re-frame/reg-event-db
+ ::show-notification
+ [interceptors]
+ (fn [db [notification]]
+   (queries/show-notification db notification)))
+
 (re-frame/reg-event-fx
  ::hide-notification
  [interceptors]
  (fn [{:keys [db]} _]
    {:db (-> db
             (queries/assoc-open false))}))
-
-(re-frame/reg-event-db
- ::show-notification
- [interceptors]
- (fn [db [notification]]
-   (queries/show-notification db notification)))
