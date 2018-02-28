@@ -5,6 +5,4 @@
 (re-frame/reg-sub
  ::notification
  (fn [db]
-   ;; TODO
-   (prn "@DB"  db)
    (queries/notification db)))
