@@ -11,28 +11,31 @@
 (use-fixtures :each
   {:before (fn [] (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
                       (mount/start)))
-   :after (fn [] (do (mount/stop)))})
+   :after (fn [] (mount/stop))})
 
 (deftest tests
   (run-test-async
    (let [notification (re-frame/subscribe [::subs/notification])]
 
-     ;; TEST: event accepts arbitrary props
-     (re-frame/dispatch [::events/show {:message "foo"
-                                        :action-href "bar"}])
+     ;; (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
+     ;;     (mount/start))
 
-     (wait-for [::events/show-notification]
-               (is (= "foo" (:message @notification)))
-               (is (= "bar" (:action-href @notification)))
-               (wait-for [::events/clear-queue]))
+     ;; ;; TEST: event accepts arbitrary props
+     ;; (re-frame/dispatch [::events/show {:message "foo"
+     ;;                                    :action-href "bar"}])
 
-     ;; TEST: sync sugar
+     ;; (wait-for [::events/show-notification]
+     ;;           (is (= "foo" (:message @notification)))
+     ;;           (is (= "bar" (:action-href @notification)))
+     ;;           (wait-for [::events/clear-queue]))
 
-     (re-frame/dispatch [::events/show "abc"])
+     ;; ;; TEST: sync sugar
 
-     (wait-for [::events/show-notification]
-               (is (= "abc" (:message @notification)))
-               (wait-for [::events/clear-queue]))
+     ;; (re-frame/dispatch [::events/show "abc"])
+
+     ;; (wait-for [::events/show-notification]
+     ;;           (is (= "abc" (:message @notification)))
+     ;;           (wait-for [::events/clear-queue]))
 
      ;; TEST: override default-show-duration
 
