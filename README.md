@@ -69,11 +69,11 @@ This is typically the only event you should ever need. Queues the next notificat
 You can pass the following arguments:
 
 * `:message` to be displayed
-* `show-duration` (which overrides the default `default-show-duration`)
+* `:show-duration` (which overrides the default `default-show-duration`)
 * an arbitrary number of other arguments
 
 ```clojure
-(ns district.ui.core
+(ns my-district
   (:require [re-frame.core :as re-frame]
             [district.ui.notification.events :as events]))
 
