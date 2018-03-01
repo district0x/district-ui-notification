@@ -40,7 +40,7 @@ You can pass following args to initiate this module:
 * `:default-hide-duration` Specifies the amount of time (in milliseconds) between consecutive notifications.
 
 ```clojure
-(ns district.ui.core
+(ns my-district
   (:require [mount.core :as mount]
             [district.ui.notification]))
 
@@ -52,10 +52,10 @@ You can pass following args to initiate this module:
 The validity of the args passed to the module will be checked at runtime if you have set the `clojure.spec.check-asserts` system property to `true`:
 
 ```clojure
-(ns district.ui.core
+(ns my-district
   (:require [cljs.spec.alpha :as s]))
 
-    (s/check-asserts true)
+(s/check-asserts true)
 ```
 If the arguments do not conform to the [`::opts`](#opts) spec, an exception is thrown.
 
