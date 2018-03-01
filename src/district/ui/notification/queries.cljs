@@ -40,6 +40,9 @@
 (defn default-show-duration [db]
   (get-in db [db-key :default-show-duration]))
 
+(defn default-hide-duration [db]
+  (get-in db [db-key :default-hide-duration]))
+
 (defn assoc-open [db value]
   (assoc-in db [db-key :notification :open?] value))
 
