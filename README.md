@@ -6,7 +6,8 @@ Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://gi
 logic to build the component upon. This way many different reagent components can be build on top of this module.
 
 ## Installation
-Add `[district0x/district-ui-notification "1.0.0"]` into your project.clj.  Include `[district.ui.notification]` in your CLJS file, where you use `mount/start`
+Add `[district0x/district-ui-notification "1.0.0"]` into your project.clj.
+Include `[district.ui.notification]` in your CLJS file, where you use `mount/start`
 
 ## Usage
 
