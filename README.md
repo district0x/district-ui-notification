@@ -6,8 +6,7 @@ Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://gi
 logic to build the component upon. This way many different reagent components can be build on top of this module.
 
 ## Installation
-Add `[district0x/district-ui-notification "1.0.0"]` into your project.clj
-Include `[district.ui.notification]` in your CLJS file, where you use `mount/start`
+Add `[district0x/district-ui-notification "1.0.0"]` into your project.clj.  Include `[district.ui.notification]` in your CLJS file, where you use `mount/start`
 
 ## Usage
 
@@ -37,13 +36,15 @@ This namespace contains district-ui-notification [mount](https://github.com/toli
 
 You can pass following args to initiate this module:
 * `:default-show-duration` Specifies the default amount of time (in milliseconds) the notification will be displayed for.
+* `:default-hide-duration` Specifies the amount of time (in milliseconds) between consecutive notifications.
 
 ```clojure
 (ns district.ui.core
   (:require [mount.core :as mount]
             [district.ui.notification]))
 
-(-> (mount/with-args {:district-ui-notification {:default-show-duration 1000}})
+(-> (mount/with-args {:district-ui-notification {:default-show-duration 2000
+                                                 :default-hide-duration 1000}})
       (mount/start))
 ```
 
@@ -55,7 +56,7 @@ The validity of the args passed to the module will be checked at runtime if you 
 
     (s/check-asserts true)
 ```
-If the do not conform to the  [`::opts`](#opts)  spec, an exception is thrown.
+If the arguments do not conform to the [`::opts`](#opts) spec, an exception is thrown.
 
 ## <a name="districtuinotificationevents"> district.ui.notification.events
 
@@ -68,7 +69,7 @@ You can pass the following arguments:
 
 * `:message` to be displayed
 * `show-duration` (which overrides the default `default-show-duration`)
-* arbitrary number of other arguments
+* an arbitrary number of other arguments
 
 ```clojure
 (ns district.ui.core

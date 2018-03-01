@@ -22,13 +22,8 @@
  ::stop
  [interceptors]
  (fn [{:keys [:db]}]
-   {:db (queries/dissoc-district-ui-notification db)}))
-
-(re-frame/reg-event-db
- ::init
- [interceptors]
- (fn [db [opts]]
-   (queries/assoc-district-ui-notification db opts)))
+   {:db (queries/dissoc-district-ui-notification db)
+    :forward-events {:unregister queries/db-key}}))
 
 (re-frame/reg-event-fx
  ::show
@@ -51,8 +46,11 @@
 (re-frame/reg-event-fx
  ::process-queue
  [interceptors]
+ ^{:doc "This handler works by interweaving queued events with 'empty' notifications, which work as ::hide-notification events.
+         Re-frame queue of events becomes (distinct (concat [show1 hide] [show1 show2 hide])) etc. where each vector is a sequence of queued notifications."}
  (fn [{:keys [:db]} ]
-   (let [queue (queries/queue db)
+   (let [hide-duration (queries/default-hide-duration db)
+         queue (queries/queue db)
          events (loop [queue queue
                        this (peek queue)
                        events [{:delay 0 :notification this}]]
@@ -66,7 +64,10 @@
                              (conj events {:delay (+ delay
                                                      (if show-duration
                                                        show-duration
-                                                       (queries/default-show-duration db)))
+                                                       (queries/default-show-duration db))
+                                                     (if next
+                                                       hide-duration
+                                                       0))
                                            :notification next})))))]
      {:dispatch-n (mapv #(vec [::schedule-next-notification %])
                         events)

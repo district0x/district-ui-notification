@@ -1,8 +1,12 @@
 (ns district.ui.notification.spec
   (:require [cljs.spec.alpha :as s]))
 
-(s/def ::default-show-duration integer?)
-(s/def ::show-duration #(and % integer? pos?))
+(def pos-int #(and % integer? pos?))
+
+(s/def ::default-show-duration pos-int)
+(s/def ::show-duration pos-int)
+(s/def ::hide-duration pos-int)
+(s/def ::default-hide-duration pos-int)
 (s/def ::message string?)
 (s/def ::open? boolean?)
 (s/def ::notification (s/or :string ::message
@@ -10,5 +14,5 @@
                                     :opt-un [::open? ::show-duration])))
 
 (s/def ::queue (s/+ ::notification))
-(s/def ::opts (s/nilable (s/keys :req-un [::default-show-duration]
+(s/def ::opts (s/nilable (s/keys :req-un [::default-show-duration ::default-hide-duration]
                                  :opt-un [::notification ::queue])))
