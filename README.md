@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/district0x/district-ui-notification.svg?branch=master)](https://travis-ci.org/district0x/district-ui-notification)
 
-Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://github.com/Day8/re-frame) module for a district UI, that provides core logic for transaction notofications. This module does not provide [reagent](https://github.com/reagent-project/reagent) UI component for notifications, only
+Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://github.com/Day8/re-frame) module for a district UI, that provides core logic for transaction notifications. This module does not provide [reagent](https://github.com/reagent-project/reagent) UI component for notifications, only
 logic to build the component upon. This way many different reagent components can be build on top of this module.
 
 ## Installation
