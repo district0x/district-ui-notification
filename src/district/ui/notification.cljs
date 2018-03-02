@@ -8,11 +8,12 @@
 
 (defn start [opts]
   {:pre [(s/assert ::spec/opts opts)]}
-  (re-frame/dispatch-sync [::events/start opts]))
+  (re-frame/dispatch-sync [::events/start opts])
+  opts)
 
 (defn stop []
   (re-frame/dispatch-sync [::events/stop]))
 
 (defstate district-ui-notification
-  :start (start (:district-ui-notification (mount/args)))
+  :start (start (:notification (mount/args)))
   :stop (stop))
