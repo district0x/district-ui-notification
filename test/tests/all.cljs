@@ -12,8 +12,8 @@
 (s/check-asserts true)
 
 (use-fixtures :each
-  {:before (fn [] (-> (mount/with-args {:district-ui-notification {:default-show-duration 1000
-                                                                   :default-hide-duration 1000}})
+  {:before (fn [] (-> (mount/with-args {:notification {:default-show-duration 1000
+                                                       :default-hide-duration 1000}})
                       (mount/start)))
    :after (fn [] (mount/stop))})
 

@@ -6,7 +6,7 @@ Clojurescript [mount](https://github.com/tolitius/mount) + [re-frame](https://gi
 logic to build the component upon. This way many different reagent components can be build on top of this module.
 
 ## Installation
-Add `[district0x/district-ui-notification "1.0.0"]` into your project.clj.<br/>
+Add `[district0x/district-ui-notification "1.0.1"]` into your project.clj.<br/>
 Include `[district.ui.notification]` in your CLJS file, where you use `mount/start`.
 
 ## Usage
@@ -44,8 +44,8 @@ You can pass following args to initiate this module:
   (:require [mount.core :as mount]
             [district.ui.notification]))
 
-(-> (mount/with-args {:district-ui-notification {:default-show-duration 2000
-                                                 :default-hide-duration 1000}})
+(-> (mount/with-args {:notification {:default-show-duration 2000
+                                     :default-hide-duration 1000}})
       (mount/start))
 ```
 
