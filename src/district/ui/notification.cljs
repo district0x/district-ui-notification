@@ -7,9 +7,12 @@
             [re-frame.core :as re-frame]))
 
 (defn start [opts]
-  {:pre [(s/assert ::spec/opts opts)]}
-  (re-frame/dispatch-sync [::events/start opts])
-  opts)
+  (let [opts (merge {:default-show-duration 5000
+                     :default-hide-duration 2000}
+                    opts)]
+    (s/assert ::spec/opts opts)
+    (re-frame/dispatch-sync [::events/start opts])
+    opts))
 
 (defn stop []
   (re-frame/dispatch-sync [::events/stop]))

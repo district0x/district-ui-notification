@@ -36,8 +36,8 @@ Include `[district.ui.notification]` in your CLJS file, where you use `mount/sta
 This namespace contains district-ui-notification [mount](https://github.com/tolitius/mount) module.
 
 You can pass following args to initiate this module:
-* `:default-show-duration` Specifies the default amount of time (in milliseconds) the notification will be displayed for.
-* `:default-hide-duration` Specifies the amount of time (in milliseconds) between consecutive notifications.
+* `:default-show-duration` Specifies the default amount of time (in milliseconds) the notification will be displayed for. Default: 5000
+* `:default-hide-duration` Specifies the amount of time (in milliseconds) between consecutive notifications. Default: 2000
 
 ```clojure
 (ns my-district
